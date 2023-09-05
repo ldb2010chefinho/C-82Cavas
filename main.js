@@ -4,11 +4,13 @@ ctx= canvas.getContext("2d");
  var ultimoX,ultimoY;
  var color="darkgreen";
  var widthLine = 2;
- 
+ var radius = 40;
+
  canvas.addEventListener("mousedown",myMouseDown);
  function myMouseDown(e){
     color =document.getElementById("cor").value;
     widthLine =document.getElementById("espessura").value;
+    radius =document.getElementById("radius").value;
     mouseEvent = "mouseDown"
  };
 
@@ -26,21 +28,16 @@ ctx= canvas.getContext("2d");
  function myMouseMove(e){
     var positionMouseX = e.clientX-canvas.offsetLeft;
     var positionMouseY = e.clientY-canvas.offsetTop;
-    if (mouseEvent == "mouseDown") {
+    if(mouseEvent="mouseDown"){
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = widthLine;
         console.log("Última posição das coordenadas x e y = ");
         console.log("x = " + ultimoX + "y = " + ultimoY);
-        ctx.moveTo(ultimoX, ultimoY);
-
-        console.log("Posição atual das coordenadas x e y = ");
-        console.log("x = " + positionMouseX + "y = " + positionMouseY);
-        ctx.lineTo(positionMouseX, positionMouseY);
+        ctx.arc(positionMouseX, positionMouseY,radius,0 , 2*Math.PI)
         ctx.stroke();
-    }
-        ultimoX = positionMouseX;
-        ultimoY = positionMouseY;
+    };
+        
  };
 
  //Limpar a tela
